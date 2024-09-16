@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://metrobusccinfo.org/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://metrobusccinfo.org/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://metrobusccinfo.org/">
+      <xsd:element name="GetInfoFlotaBus">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="GetInfoFlotaBusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="GetInfoFlotaBusResult" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetInfoFlotaBusInput">
+    <wsdl:part name="parameters" element="tns:GetInfoFlotaBus"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoFlotaBusOutput">
+    <wsdl:part name="parameters" element="tns:GetInfoFlotaBusResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="InfoBusPortType">
+    <wsdl:operation name="GetInfoFlotaBus">
+      <wsdl:input message="tns:GetInfoFlotaBusInput"/>
+      <wsdl:output message="tns:GetInfoFlotaBusOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InfoBusBinding" type="tns:InfoBusPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetInfoFlotaBus">
+      <soap:operation soapAction="http://metrobusccinfo.org/GetInfoFlotaBus"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InfoBusService">
+    <wsdl:port name="InfoBusPort" binding="tns:InfoBusBinding">
+      <soap:address location="http://demo9081663.mockable.io/wsInfoBus"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
